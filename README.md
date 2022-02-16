@@ -8,3 +8,4 @@ Play it online: <https://rafaelodon.github.io/chuton/>
 
 ## Credits:
 * Words scraped from: <http://dicio.com.br/>, <https://museulinguaportuguesa.org.br/> e <https://www.palavras.net/>
+
