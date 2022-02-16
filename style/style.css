@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap');
+
+html, body, #content {
+    overflow-x:hidden; 
+    overflow-y:hidden;
+} 
+
+body{
+    text-align: center;
+    font-family: "Arvo", Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #192823;
+    margin: 0px;
+    padding: 0px;    
+}
+
+#content{
+    width: 100vw;
+    margin: 0 auto;
+    animation: show;
+    animation-duration: 2s;
+    display: none;
+}
+
+#header{    
+    height: 13vh;
+}
+
+#display{    
+    height: 54vh;
+}
+
+#message{    
+    height: 5vh;
+    padding: 1vh;
+    text-overflow: none;
+    font-weight: normal;
+    font-size:2vh;    
+    color: #D0C6B1;
+    opacity: 0;
+    filter:alpha(opacity=0);
+}
+
+#message #practice{
+    display: none;
+}
+
+#keys{    
+    max-height: 20vh;
+    margin:0;
+    padding: 0;    
+}
+
+.green{
+    color: #218559
+}
+
+.red{
+    color: #DD1E2F;
+}
+
+.yellow{
+    color: #EBB035;
+}
+
+a{    
+    text-decoration: none;
+    color: #218559;
+}
+
+h1{
+    color: hsl(41, 25%, 75%);
+    padding: 0px;
+    margin: 0px;   
+    font-size: 6vh;
+    letter-spacing: -.5vh;
+}
+h1 .o{
+    color:#218559;
+}
+
+#guessInput{
+    opacity:0;
+    filter:alpha(opacity=0);
+    position: absolute;
+    top:0;
+    left:50%;
+    width: 0x;
+    height: 0px;
+}
+
+#keys .key{
+    display:inline-block;                    
+    padding: .3vh;
+    margin: 0 .15vh .25vh .15vh;
+    width: 4.6vh;            
+    border-radius: 1vh;
+    text-align: center;
+    font-size: 3vh;
+    height: 4vh;
+    line-height: 4.5vh;            
+    background-color: slategrey;
+    color:black;
+    cursor: pointer;
+}
+
+#keys .key.enter{
+    width: 10vh;
+}
+
+#keys .key.key.backspace{
+    width: 6vh;    
+}
+
+#keys .key.enter,
+#keys .key.backspace{
+    text-transform: none;
+    background-color: darkslategrey;    
+}
+
+.cell{
+    display:inline-block;                
+    padding: 0;
+    margin: .5vh;
+    width: 9vh;      
+    height: 8vh;          
+    line-height: 8vh;
+    border-radius: 1vh;
+    text-align: center;
+    font-size: 6vh;
+    background-color: #D0C6B1;
+    color:black;
+}
+
+.disabled{
+    opacity:.5;
+    filter:alpha(opacity.5)
+}
+
+@keyframes aX {
+    from {
+        background-color: #D0C6B1;
+    }
+    to {
+        background-color: #DD1E2F;                    
+    }
+}                        
+.X {
+    animation-name: aX;
+    animation-duration: 1s;  
+    background-color: #DD1E2F !important;
+}
+
+@keyframes aP {
+    from {
+        background-color: #D0C6B1;                    
+    }
+    to {
+        background-color: #EBB035;                    
+    }
+}
+.P {
+    animation-name: aP;
+    animation-duration: 1s;
+    background-color: #EBB035 !important;
+}
+
+@keyframes aV {
+    from {
+        background-color: #D0C6B1;                    
+    }
+    to {
+        background-color: #218559;                    
+    }
+}
+.V{
+    animation-name: aV;
+    animation-duration: 1s;
+    background-color: #218559 !important;                                
+}
+
+@keyframes hide {
+    from {
+        opacity: 1;
+        filter:alpha(opacity=1);                             
+    }
+    to {
+        opacity: 0;
+        filter:alpha(opacity=0);         
+    }
+}   
+.hidden{
+    animation-name: hide;
+    animation-duration: .51s;
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        filter:alpha(opacity=0);                             
+    }
+    to {
+        opacity: 1;
+        filter:alpha(opacity=1);         
+    }
+}   
+.visible{
+    animation-name: show;
+    animation-duration: .51s;
+}
+
+#notification{
+    position:absolute;
+    top:2%;
+    left:50%;
+    width: 20em;
+    margin-left: -10em;
+    background-color: #EBB035;
+    color: black;
+    border-radius: 1em;
+    padding: 1em 0em 1em 0em;
+    box-shadow: 0 1em 1em 0 rgba(0, 0, 0, 0.5);
+    display: none;
+    font-weight: normal;
+}
+
+#help{
+    display:none;
+}
+
+p .key{
+    font-size: 0.8em;
+    height: 0.8em;
+    line-height: 0.9em;
+    width: 0.8em;
+    border-radius: .4em;
+    text-align: center;
+    padding: .2em;
+    color: black !important;    
+}
+
+p{
+    text-transform: none;
+    font-weight: normal;
+    text-align: left;
+    letter-spacing: 0.1em;    
+}
+
+#topBar div{
+    display:inline;        
+    font-size: 1.8vh;        
+    color: #D0C6B1;
+    font-weight: normal;
+    text-transform: none;
+    padding: .5vh;
+}
+
+#topBar .button{
+    border: 1px solid darkslategrey;
+    border-radius: 1vh; 
+    cursor: pointer;  
+    user-select: none; 
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+#score{
+    display:none;
+}
+
+ul.scores{
+    margin: 0px;
+    padding: 0px;
+}
+ul.scores > li{
+    display: inline-block;    
+    width: 12%;
+    height: 20vh;    
+}
+
+ul.scores > li > div.statsbar{
+    display: block;
+    height: 80%;
+    width: 100%;    
+    bottom: 0px;
+    background: #218559;    
+}
+
+ul.scores > li > #score-lost{
+    background: #DD1E2F !important;    
+}
+
+ul.scores > li > div.statsbar > div{
+    background:black;        
+    height: 80%;
+    width: 100%;
+    display: inline-flex;
+    vertical-align: text-bottom;
+}
+
+ul.scores > li > div.statslabel{
+    align-self: flex-end;
+    border: 1px solid blue;
+}
+
+#pratice{
+    display: none;
+}

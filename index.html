@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chut•On</title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <link rel="stylesheet" href="style/loading.css">        
+        <link rel="stylesheet" href="style/modal.css">
+        <link rel="stylesheet" href="style/style.css">                
+    	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    </head>
+    <body>        
+        <div id="loading">
+            <div class="cubes">
+                <div></div><div></div><div></div><div></div>
+            </div>
+        </div>
+        <div id="content">            
+            <div id="header">                
+                <h1>
+                    <span class="yellow">C</span>
+                    <span class="red">H</span>
+                    <span class="yellow">U</span>
+                    <span class="red">T</span>
+                    •
+                    <span class="green">O</span>
+                    <span class="green">N</span>
+                </h1>
+                <div id="topBar">
+                    <div id="helpButton" class="button">? Ajuda</div>
+                    <div id="scoreButton" class="button">★ Placar</div>
+                    <div id="resetButton" class="button">Treinar</div>
+                    <div id="share" class="button">Compartilhar</div>                    
+                    <div>by <a target="_blank" href="http://rafaelodon.com">odon</a></div>
+                </div>
+            </div>            
+            <input id="guessInput" maxlength="5" inputmode='none'/>    
+            <div id="display"></div>        
+            <div id="message">                                
+                <div id="result">
+                    Resposta: <span class="answer"></span>.&nbsp;                
+                    <br/>
+                    Próximo jogo em <span id="time2midnight"></span>
+                </div>
+                <div id="practice">
+                    Você está no modo treino...
+                    <br/>
+                    <a id="endPractice" href="#">Voltar</a>
+                </div>
+            </div>            
+            <div id="keys"></div>            
+        </div>
+        <div id="modal">                
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <h3 class="modal-title">Título</h3>                
+                <div class="modal-text">mensagem</div>
+                <div class="modal-buttons">
+                    <button class="modal-button">Ok</button>
+                </div>
+            </div>
+        </div>
+        <div id="notification">mensagem</div>      
+        <div id="help">
+            <p>Tente descobrir a palavra do dia!</p>
+            <p>Letras certas ficarão <span class="key V">V</span>erdes.</p>
+            <p>Letras certas na posição errada ficarão <span class="key P">A</span>marelas.</p>
+            <p>Letras que não fazem parte da solução ficarão <span class="key X">V</span>ermelhas.</p>
+        </div> 
+        <div id="score">
+            <p>
+                <span id="score-total" class="stats">0</span> e
+                <span id="score-wins" class="stats">0</span>.
+            </p>            
+            <p><h4>Estatísticas:</h4></p>
+            <ul class="scores">
+                <li><div id="score-win1" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">1ª</div></li>
+                <li><div id="score-win2" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">2ª</div></li>
+                <li><div id="score-win3" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">3ª</div></li>
+                <li><div id="score-win4" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">4ª</div></li>
+                <li><div id="score-win5" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">5ª</div></li>
+                <li><div id="score-win6" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">6ª</div></li>                
+                <li><div id="score-lost" class="statsbar"><div class="bar">&nbsp;</div></div><div class="staslabel">:(</div></li>
+            </div>            
+        </div>
+    </body>    
+    <script src="js/utils.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/chuton-data.js"></script>
+    <script src="js/chuton-core.js"></script>
+    <script src="js/chuton.js"></script>    
+    <script>
+        loadGame();
+    </script>
+</html>
