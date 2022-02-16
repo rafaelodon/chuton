@@ -52,3 +52,18 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+
+#notification{
+    position:absolute;
+    top:2%;
+    left:50%;
+    width: 20em;
+    margin-left: -10em;
+    background-color: #EBB035;
+    color: black;
+    border-radius: 1em;
+    padding: 1em 0em 1em 0em;
+    box-shadow: 0 1em 1em 0 rgba(0, 0, 0, 0.5);
+    display: none;
+    font-weight: normal;
+}

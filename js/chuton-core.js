@@ -62,6 +62,8 @@ class ChutOnCore {
                     throw new Error(ChutOnCore.ERR_NOT_FOUND);                
                 }
             }
+        }else{
+            throw new Error(ChutOnCore.ERR_WRONG_LENGTH);
         }
     }    
 

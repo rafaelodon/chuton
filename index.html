@@ -9,11 +9,23 @@
         <link rel="stylesheet" href="style/modal.css">
         <link rel="stylesheet" href="style/style.css">                
     	<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/fontawesome.min.css" integrity="sha512-8Vtie9oRR62i7vkmVUISvuwOeipGv8Jd+Sur/ORKDD5JiLgTGeBSkI3ISOhc730VGvA5VVQPwKIKlmi+zMZ71w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/solid.min.css" integrity="sha512-6/gTF62BJ06BajySRzTm7i8N2ZZ6StspU9uVWDdoBiuuNu5rs1a8VwiJ7skCz2BcvhpipLKfFerXkuzs+npeKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EYB1Q29E6F"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-EYB1Q29E6F');
+        </script>        
     </head>
     <body>        
         <div id="loading">
             <div class="cubes">
-                <div></div><div></div><div></div><div></div>
+                <div class="cube">A</div>
+                <div class="cube">B</div>
+                <div class="cube">C</div>
+                <div class="cube">D</div>
             </div>
         </div>
         <div id="content">            
@@ -28,25 +40,23 @@
                     <span class="green">N</span>
                 </h1>
                 <div id="topBar">
-                    <div id="helpButton" class="button">? Ajuda</div>
-                    <div id="scoreButton" class="button">★ Placar</div>
-                    <div id="resetButton" class="button">Treinar</div>
-                    <div id="share" class="button">Compartilhar</div>                    
-                    <div>by <a target="_blank" href="http://rafaelodon.com">odon</a></div>
+                    <div id="helpButton" class="button"><span class="fa-solid fa-question"></span> Ajuda</div>
+                    <div id="scoreButton" class="button"><span class="fa-solid fa-chart-column"></span> Placar</div>
+                    <div id="resetButton" class="button"><span class="fa-solid fa-stopwatch-20"></span> Treinar</div>                    
+                    <div class="by">by <a target="_blank" href="https://twitter.com/rafael_odon">odon</a></div>
                 </div>
-            </div>            
-            <input id="guessInput" maxlength="5" inputmode='none'/>    
-            <div id="display"></div>        
-            <div id="message">                                
+            </div>
+            <input id="guessInput" maxlength="5" inputmode='none'/>
+            <div id="display"></div>
+            <div id="message">
                 <div id="result">
-                    Resposta: <span class="answer"></span>.&nbsp;                
+                    Resposta: <span class="answer"></span>&nbsp;
+                    <a id="share" href="#"><i class="fa-solid fa-share-nodes"></i> Compartilhar</a>
                     <br/>
                     Próximo jogo em <span id="time2midnight"></span>
                 </div>
-                <div id="practice">
-                    Você está no modo treino...
-                    <br/>
-                    <a id="endPractice" href="#">Voltar</a>
+                <div id="practice">                    
+                    Você está no modo treino! <a id="endPractice" href="#">Sair.</a><br/>
                 </div>
             </div>            
             <div id="keys"></div>            
@@ -91,7 +101,5 @@
     <script src="js/chuton-data.js"></script>
     <script src="js/chuton-core.js"></script>
     <script src="js/chuton.js"></script>    
-    <script>
-        loadGame();
-    </script>
+    <script src="js/index.js"></script>
 </html>

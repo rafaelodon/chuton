@@ -99,18 +99,22 @@ class ChutOn {
         }
     }
 
-    render() {
+    render(drama=false) {
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 5; j++) {
                 let cell = document.getElementById('cell_' + i + '_' + j);
                 cell.setAttribute('class', 'cell');
                 cell.innerHTML = "&nbsp;";
-                if (i < this.data.guesses.length) {
+                if (i < this.data.guesses.length) {                    
                     let character = this.data.guesses[i].guess[j];
                     let cellState = this.data.guesses[i].feedback[j];
                     let keyState = this.data.keys[sanitize(character)];
-                    cell.innerText = character;
-                    cell.setAttribute('class', 'cell ' + cellState);
+                    cell.innerText = character;                    
+                    if(drama && i == this.data.guesses.length - 1){
+                        setTimeout(() => cell.setAttribute('class', 'cell ' + cellState), 125*j);
+                    }else{
+                        cell.setAttribute('class', 'cell ' + cellState);
+                    }
                     document.getElementById("key_" + sanitize(character).toUpperCase()).setAttribute('class', 'key ' + keyState);
                 } else if (i == this.data.guesses.length && this.game.gameState == ChutOnCore.STATE_PLAYING) {
                     if (j < this.data.guess.length) {
@@ -143,6 +147,7 @@ class ChutOn {
         this.bindScoreButton("scoreButton");
         this.bindResetButton("resetButton");
         this.bindShareButton("share");
+        this.bindEndPracticeButton("endPractice");
         this.bindKeys();
     }
 
@@ -228,8 +233,7 @@ class ChutOn {
 
         let resetButton = document.getElementById(elementId);
 
-        resetButton.onclick = () => {
-            console.log("uai")
+        resetButton.onclick = () => {            
             //Hard reset
             //ChutOnData.clearData();            
             //window.location.href = window.location.href;
@@ -237,12 +241,13 @@ class ChutOn {
 
             //Soft reset (practice with a sample word)
             modal.show("Praticar","Você vai praticar com uma nova palavra aleatória.<br/><br/>"+
-                "Ao fechar a janela o treino será perdido e será retomado o jogo do dia.","Ok", () => {
+                "Ao fechar a janela o treino será perdido e o jogo do dia será retomado.","Ok", () => {
                 modal.hide();
                 this.practiceMode = true;
                 let index = Math.floor(Math.random() * words.selected.length);
                 this.game = new ChutOnCore(words.selected[index]);
                 this.data.guesses = [];
+                this.data.guesses.length = 0;
                 this.data.index = index;
                 this.data.keys = {};                
                 this.data.state = this.game.gameState;
@@ -260,8 +265,8 @@ class ChutOn {
         shareButton.onclick = () => {
             let text = "";
             if(!this.practiceMode && this.gameState != ChutOnCore.STATE_PLAYING){
-                let text = "Joguei ChutOn #" + stats.count.total + "\n\n";
-                for (let i = 0; i < 6; i++) {
+                text = "Acertei meu ChutOn #" + stats.count.total + "\n\n";
+                for (let i = 0; i < this.data.guesses.length; i++) {
                     text += this.data.guesses[i].feedback
                         .replaceAll('X', '🟥 ')
                         .replaceAll("V", '🟩 ')
@@ -274,6 +279,14 @@ class ChutOn {
             text += "\nhttp://rafaelodon.github.io/chuton";
             navigator.clipboard.writeText(text);
             notification.show("Copiado! Compartilhe com CTRL+V (Colar).")            
+        }
+    }
+
+    bindEndPracticeButton(elementId) {
+        let endPraticeButton = document.getElementById(elementId);
+        endPraticeButton.onclick = () => {
+            window.location.href = window.location.href;
+            window.location.reload();
         }
     }
 
@@ -311,25 +324,30 @@ class ChutOn {
                 (success) => {
                     this.endGame(success);
                     this.congratulate(this.data.guesses.length);
-                    this.render();
+                    this.render(true);
                 },
                 (fail) => {
                     this.data.guesses = fail.guesses;
                     this.data.state = fail.state;
                     this.doUpdateGuess("");
-                    this.render();
+                    this.render(true);
                 },
                 (gameOver) => {
-                    this.endGame(gameOver);
+                    this.endGame(gameOver);                    
+                    let texto = "A palavra é:<br/><span class='answer'>" + this.data.answer + "</span>.<br/><br/>Tente novamente mais tarde ou treine com uma palavra aleatória...";
+                    if(this.practiceMode){
+                        texto = "A palavra é:<br/><span class='answer'>" + this.data.answer + "</span>.<br/><br/>Você pode continuar treinando com outras palavras!";
+                    }
+                    setTimeout(() =>                    
                     modal.show(
                         "Você perdeu!",
-                        "A palavra é <span class='answer'>" + this.data.answer + "</span>.<br/>Tente novamente mais tarde...",
+                        texto,
                         "Ok",
                         function () {
                             modal.hide();
                         }
-                    );
-                    this.render();
+                    ),1000);
+                    this.render(true);
                 }
             );
         } catch (e) {
@@ -378,28 +396,4 @@ class ChutOn {
         document.getElementById("loading").style.display = "none";
         document.getElementById("content").style.display = "block";
     }
-}
-
-// Initial empty word dictionary
-var words = {
-    selected : [],
-    index : {}
-}
-
-var loadGame = () => {
-    console.log("Aguardando o dicionário de palavras ser carregado..");
-    let xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            if(xhr.status == 200){
-                words = JSON.parse(xhr.responseText);
-                var chuton = new ChutOn(words);
-                console.log("Pronto!");
-            }else{
-                notification.show("Erro tentando carregar o dicionário de palavras.", -1)
-            }
-        }
-    }
-    xhr.open("GET", "js/words.json");
-    xhr.send();
 }

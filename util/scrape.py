@@ -122,9 +122,9 @@ def create_words_js():
     print("Valid",len(validWords))
     print("Normalized",len(normal.keys()))
 
-    # create the useful javascript file with words and validity index
-    with open('words.js','w') as f:
-        f.write("var words="+json.dumps({'selected':selectedWords,'index':normal})+";")
+    # create the words.json file
+    with open('words.json','w') as f:
+        json.dump({'selected':selectedWords,'index':normal},f)
 
 if __name__ == "__main__":
     #scrape()

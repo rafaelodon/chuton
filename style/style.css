@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap');
 
+:root {
+    --chuton-black: #192823;
+    --chuton-red: #DD1E2F;
+    --chuton-green: #218559;
+    --chuton-yellow: #EBB035;
+    --chuton-white: #D0C6B1;
+    --chuton-grey: slategrey;
+    --chuton-darkgrey: darkslategrey;
+}
+
 html, body, #content {
     overflow-x:hidden; 
     overflow-y:hidden;
@@ -10,7 +20,7 @@ body{
     font-family: "Arvo", Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: #192823;
+    background-color: var(--chuton-black);
     margin: 0px;
     padding: 0px;    
 }
@@ -32,12 +42,13 @@ body{
 }
 
 #message{    
-    height: 5vh;
-    padding: 1vh;
+    height: 5.5vh;
+    line-height: 2.8vh;
+    padding: .3vh;
     text-overflow: none;
     font-weight: normal;
-    font-size:2vh;    
-    color: #D0C6B1;
+    font-size:1.8vh;    
+    color: var(--chuton-white);
     opacity: 0;
     filter:alpha(opacity=0);
 }
@@ -53,31 +64,31 @@ body{
 }
 
 .green{
-    color: #218559
+    color: var(--chuton-green)
 }
 
 .red{
-    color: #DD1E2F;
+    color: var(--chuton-red);
 }
 
 .yellow{
-    color: #EBB035;
+    color: var(--chuton-yellow);
 }
 
 a{    
     text-decoration: none;
-    color: #218559;
+    color: var(--chuton-green);
 }
 
 h1{
-    color: hsl(41, 25%, 75%);
+    color: var(--chuton-white);
     padding: 0px;
     margin: 0px;   
     font-size: 6vh;
     letter-spacing: -.5vh;
 }
 h1 .o{
-    color:#218559;
+    color:var(--chuton-green);
 }
 
 #guessInput{
@@ -100,7 +111,7 @@ h1 .o{
     font-size: 3vh;
     height: 4vh;
     line-height: 4.5vh;            
-    background-color: slategrey;
+    background-color: var(--chuton-grey);
     color:black;
     cursor: pointer;
 }
@@ -110,13 +121,25 @@ h1 .o{
 }
 
 #keys .key.key.backspace{
-    width: 6vh;    
+    width: 6vh;
 }
 
 #keys .key.enter,
 #keys .key.backspace{
     text-transform: none;
-    background-color: darkslategrey;    
+    background-color: var(--chuton-darkgrey);    
+}
+
+#keys .key.V{
+    background-color: var(--chuton-green) !important;
+}
+
+#keys .key.X{
+    background-color: var(--chuton-red) !important;
+}
+
+#keys .key.P{
+    background-color: var(--chuton-yellow) !important;
 }
 
 .cell{
@@ -129,7 +152,7 @@ h1 .o{
     border-radius: 1vh;
     text-align: center;
     font-size: 6vh;
-    background-color: #D0C6B1;
+    background-color: var(--chuton-white);
     color:black;
 }
 
@@ -140,44 +163,44 @@ h1 .o{
 
 @keyframes aX {
     from {
-        background-color: #D0C6B1;
+        background-color: var(--chuton-white);
     }
     to {
-        background-color: #DD1E2F;                    
+        background-color: var(--chuton-red);                    
     }
 }                        
 .X {
     animation-name: aX;
     animation-duration: 1s;  
-    background-color: #DD1E2F !important;
+    background-color: var(--chuton-red);
 }
 
 @keyframes aP {
     from {
-        background-color: #D0C6B1;                    
+        background-color: var(--chuton-white);                    
     }
     to {
-        background-color: #EBB035;                    
+        background-color: var(--chuton-yellow);                    
     }
 }
 .P {
     animation-name: aP;
     animation-duration: 1s;
-    background-color: #EBB035 !important;
+    background-color: var(--chuton-yellow);
 }
 
 @keyframes aV {
     from {
-        background-color: #D0C6B1;                    
+        background-color: var(--chuton-white);
     }
     to {
-        background-color: #218559;                    
+        background-color: var(--chuton-green);                    
     }
 }
 .V{
     animation-name: aV;
     animation-duration: 1s;
-    background-color: #218559 !important;                                
+    background-color: var(--chuton-green);                                
 }
 
 @keyframes hide {
@@ -210,21 +233,6 @@ h1 .o{
     animation-duration: .51s;
 }
 
-#notification{
-    position:absolute;
-    top:2%;
-    left:50%;
-    width: 20em;
-    margin-left: -10em;
-    background-color: #EBB035;
-    color: black;
-    border-radius: 1em;
-    padding: 1em 0em 1em 0em;
-    box-shadow: 0 1em 1em 0 rgba(0, 0, 0, 0.5);
-    display: none;
-    font-weight: normal;
-}
-
 #help{
     display:none;
 }
@@ -248,19 +256,25 @@ p{
 }
 
 #topBar div{
-    display:inline;        
-    font-size: 1.8vh;        
-    color: #D0C6B1;
+    display:inline;            
+    color: var(--chuton-white);
     font-weight: normal;
-    text-transform: none;
-    padding: .5vh;
+    text-transform: none;    
 }
 
-#topBar .button{
-    border: 1px solid darkslategrey;
+.button{
+    margin: 0 .5vh 0 .5vh;
+    font-size: 2vh;    
+    padding: .4vh;
+    display: inline;
+    border: 1px solid var(--chuton-darkgrey);
     border-radius: 1vh; 
     cursor: pointer;  
     user-select: none; 
+}
+
+.button:hover{
+    background-color: darkslategray;
 }
 
 .left{
@@ -290,11 +304,11 @@ ul.scores > li > div.statsbar{
     height: 80%;
     width: 100%;    
     bottom: 0px;
-    background: #218559;    
+    background: var(--chuton-green);    
 }
 
 ul.scores > li > #score-lost{
-    background: #DD1E2F !important;    
+    background: var(--chuton-red) !important;    
 }
 
 ul.scores > li > div.statsbar > div{
@@ -307,9 +321,23 @@ ul.scores > li > div.statsbar > div{
 
 ul.scores > li > div.statslabel{
     align-self: flex-end;
-    border: 1px solid blue;
 }
 
 #pratice{
     display: none;
+}
+
+.answer{
+    font-weight: bold;
+    color: var(--chuton-red);
+    text-transform: uppercase;
+    letter-spacing: .15em;
+}
+
+.by{
+    font-size: 0.75em;
+}
+
+#share{
+    margin-left: 2em;
 }
