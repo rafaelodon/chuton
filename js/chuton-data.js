@@ -1,14 +1,16 @@
 class ChutOnData {
-
+    static CHUTON_VERSION = "1.0.0";
     static STORAGE_DATA = "chuton.data";
-    static STORAGE_STATS = "chuton.stats";
+    static STORAGE_STATS = "chuton.stats";    
     static INITIAL_DATA = {
         "guesses": [],
         "guess": "",
         "answer": "",
         "keys": {},
         "index": 0,
-        "state": 0
+        "state": 0,
+        "version": ChutOnData.CHUTON_VERSION,
+        "timestamp": new Date().getTime()
     }
     static INITIAL_STATS = {
         "count": {
@@ -21,7 +23,8 @@ class ChutOnData {
             "win5": 0,
             "win6": 0
         },
-        "history": []
+        "history": [],
+        "version": ChutOnData.CHUTON_VERSION
     }
 
     static loadGameData() {
