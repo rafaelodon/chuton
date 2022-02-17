@@ -88,7 +88,6 @@ class ChutOn {
                     key.innerText = "Enter";
                     key.setAttribute('class', 'key enter');
                     key.setAttribute('id', 'key_enter');
-
                 } else {
                     key.setAttribute('id', 'key_' + lc);
                     key.setAttribute('class', 'key');
@@ -99,23 +98,23 @@ class ChutOn {
         }
     }
 
-    render(drama=false) {
+    render(drama=false) {        
         for (let i = 0; i < 6; i++) {
             for (let j = 0; j < 5; j++) {
+                
                 let cell = document.getElementById('cell_' + i + '_' + j);
                 cell.setAttribute('class', 'cell');
-                cell.innerHTML = "&nbsp;";
+                cell.innerHTML = "&nbsp;";     
+
                 if (i < this.data.guesses.length) {                    
                     let character = this.data.guesses[i].guess[j];
-                    let cellState = this.data.guesses[i].feedback[j];
-                    let keyState = this.data.keys[sanitize(character)];
+                    let cellState = this.data.guesses[i].feedback[j];                    
                     cell.innerText = character;                    
                     if(drama && i == this.data.guesses.length - 1){
                         setTimeout(() => cell.setAttribute('class', 'cell ' + cellState), 125*j);
                     }else{
                         cell.setAttribute('class', 'cell ' + cellState);
-                    }
-                    document.getElementById("key_" + sanitize(character).toUpperCase()).setAttribute('class', 'key ' + keyState);
+                    }                
                 } else if (i == this.data.guesses.length && this.game.gameState == ChutOnCore.STATE_PLAYING) {
                     if (j < this.data.guess.length) {
                         cell.innerText = this.data.guess[j];
@@ -125,6 +124,16 @@ class ChutOn {
                 }
             }
         }
+
+        let keys = "abcdefghijklmnopqrstuvwxyz";
+        for(let i in keys){
+            let key = document.getElementById("key_" + keys[i].toUpperCase());
+            key.setAttribute('class', 'key');
+            if(keys[i] in this.data.keys){                
+                key.setAttribute('class', 'key ' + this.data.keys[keys[i]]);
+            }
+        }
+
         this.renderResult("message");
     }
 
@@ -249,7 +258,7 @@ class ChutOn {
                 this.data.guesses = [];
                 this.data.guesses.length = 0;
                 this.data.index = index;
-                this.data.keys = {};                
+                this.data.keys = this.game.charsState;                
                 this.data.state = this.game.gameState;
                 this.doUpdateGuess("");
                 this.render();
