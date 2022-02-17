@@ -301,8 +301,8 @@ ul.scores > li{
 
 ul.scores > li > div.statsbar{
     display: block;
-    height: 80%;
-    width: 100%;    
+    height: 100%;
+    width: 100%;
     bottom: 0px;
     background: var(--chuton-green);    
 }
@@ -311,12 +311,18 @@ ul.scores > li > #score-lost{
     background: var(--chuton-red) !important;    
 }
 
-ul.scores > li > div.statsbar > div{
+ul.scores > li > div.statsbar > div.bar{
     background:black;        
-    height: 80%;
+    height: 0%;
     width: 100%;
-    display: inline-flex;
-    vertical-align: text-bottom;
+    display: block;
+    margin:0px;
+    padding:0px;
+}
+
+ul.scores > li > div.statsbar > div.perc{
+    font-size:0.75em;  
+    overflow: hidden;  
 }
 
 ul.scores > li > div.statslabel{

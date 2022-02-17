@@ -24,7 +24,7 @@ var loadGame = () => {
     xhr.onreadystatechange = () => {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if(xhr.status == 200){
-                words = JSON.parse(xhr.responseText);
+                words = JSON.parse(xhr.responseText);                                
                 var chuton = new ChutOn(words);
                 console.log("Pronto!");
             }else{

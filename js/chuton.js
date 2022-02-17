@@ -221,13 +221,20 @@ class ChutOn {
 
             for (let c = 1; c <= 6; c++) {
                 let num = stats.count["win" + c];
-                let perc = total > 0 ? Math.floor(num / total * 100) : 0;
+                let perc = total > 0 ? Math.floor(num / total * 100) : 0;                
+                
                 let el = document.getElementById("score-win" + c).getElementsByClassName("bar")[0];
-                el.style.height = "" + (100 - perc) + "%";
+                el.style.height = "" + (100 - perc) + "%";                
+                
+                let el2 = document.getElementById("score-win" + c).getElementsByClassName("perc")[0];
+                el2.innerText = perc >= 10 ? ""+perc+"%" : "";                
             }
 
             let el = document.getElementById("score-lost").getElementsByClassName("bar")[0];
             el.style.height = "" + (100 - lost_perc) + "%";
+            
+            let el2 = document.getElementById("score-lost").getElementsByClassName("perc")[0];
+            el2.innerText = lost_perc >= 10 ? ""+lost_perc+"%" : "";                
 
             let scoreContent = document.getElementById("score").innerHTML;
             modal.show("Placar", scoreContent, "Ok", function () {
@@ -250,6 +257,7 @@ class ChutOn {
 
             //Soft reset (practice with a sample word)
             modal.show("Praticar","Você vai praticar com uma nova palavra aleatória.<br/><br/>"+
+                "O treino não entra para suas estatísticas.<br/><br/>"+
                 "O jogo do dia continua preservado.","Ok", () => {
                 modal.hide();
                 this.practiceMode = true;
