@@ -386,15 +386,13 @@ class ChutOn {
 
     updateStats() {
         let stats = ChutOnData.loadGameStats();
-        stats.count.total += 1;
-        console.log(this.data.state);
+        stats.count.total += 1;        
         if (this.data.state == ChutOnCore.STATE_WIN) {
             stats.count["win" + this.data.guesses.length] += 1;
         } else {
             stats.count["lost"] += 1;
         }
-        stats.history.push(this.data);
-        console.log(stats);
+        stats.history.push(this.data);        
         ChutOnData.saveGameStats(stats);
     }
 

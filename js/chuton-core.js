@@ -56,7 +56,7 @@ class ChutOnCore {
                     console.log("Não parece português")
                     throw new Error(ChutOnCore.ERR_NOT_FOUND);
                 }else if(guess in words.index) {
-                    console.log(guess,words.index[guess]);
+                    console.log("Palavra encontrada:",guess,words.index[guess]);
                     return this.checkChars(guess);
                 }else{
                     throw new Error(ChutOnCore.ERR_NOT_FOUND);                
@@ -75,10 +75,9 @@ class ChutOnCore {
             this.guesses.push({
                 'guess':guess,
                 'feedback':resp
-            });
-            console.log(this.guesses)
+            });            
             if(resp == ChutOnCore.RESP_WIN){
-                console.log("Ganhou!");
+                console.log("Você ganhou!");
                 this.gameState=ChutOnCore.STATE_WIN;
                 sucessCallback({
                     'guesses':this.guesses,
