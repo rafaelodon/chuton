@@ -13,23 +13,6 @@ var calculateDayIndex = function (){
     return Math.sqrt(((day+(date.getFullYear()-2022)*365)%words.selected.length)**2);
 }
 
-var looksLikePortuguese = function (text){
-    text = sanitize(text);
-    return isLastCharValidForPortuguese(text) && hasVowel(text);
-}
-
-var isLastCharValidForPortuguese = function (text){
-    return !"qwyktpdfgjvb".includes(text[text.length-1]);
-}
-
-var hasVowel = function (text){    
-    return text.includes('a') ||
-        text.includes('e') ||
-        text.includes('i') ||
-        text.includes('o') ||
-        text.includes('u');
-}
-
 var preSanitize = function(text){
     if(text != undefined){
         return text.toLowerCase()
