@@ -47,7 +47,7 @@ class ChutOnData {
         if (data) {
             return JSON.parse(data);
         } else {
-            return ChutOnData.INITIAL_STATS;
+            return { ...ChutOnData.INITIAL_STATS};
         }
     }
 
