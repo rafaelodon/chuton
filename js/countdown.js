@@ -29,18 +29,10 @@ function CountDown(elementId, finishCallback) {
                         }
                     }
                 if (minutes > 0) {
-                    //if(minutes == 1.0){
-                    //    text += minutes+" min ";
-                    //}else{
                     text += minutes + " min, ";
-                    //}
                 }
                 if (seconds > 0) {
-                    // if(seconds == 1){
-                    //     text += seconds+" seg";
-                    // }else{
-                    text += seconds + " seg";
-                    //}                
+                    text += seconds + " seg";               
                 }
 
                 if (text.endsWith(", ")) {
