@@ -52,10 +52,7 @@ class ChutOnCore {
             if(guess.length != 5) {
                 throw new Error(ChutOnCore.ERR_WRONG_LENGTH);
             }else{
-                if(!looksLikePortuguese(guess)){
-                    console.log("Não parece português")
-                    throw new Error(ChutOnCore.ERR_NOT_FOUND);
-                }else if(guess in words.index) {
+                if(guess in words.index) {
                     console.log("Palavra encontrada:",guess,words.index[guess]);
                     return this.checkChars(guess);
                 }else{
