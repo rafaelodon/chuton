@@ -12,6 +12,6 @@ The dictionary with more than 11k words is available at `js/words.json`, consist
 
 ## Credits:
 * Words scraped from <http://dicio.com.br/>, <https://museulinguaportuguesa.org.br/> e <https://www.palavras.net/>
-* Mobile verification regex adapted from <http://detectmobilebrowsers.com/
+* Mobile verification regex adapted from <http://detectmobilebrowsers.com/>
 
 The scraping strategy is at `util/scrape.py`.
