@@ -1,6 +1,6 @@
 # Chut On
 
-My own Wordle for Portuguese words, written in vanilla Javascript as a refactoring playground.
+My own Wordle inspired game for Portuguese words, written in vanilla Javascript as a refactoring playground.
 
 Play it online: <https://rafaelodon.github.io/chuton/>
 

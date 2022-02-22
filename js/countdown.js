@@ -10,9 +10,7 @@ function CountDown(elementId, finishCallback) {
     this.refresh = function () {
         let secs = timeIt();
         if (secs < 0) {
-            setTimeout(function () {
-                finishCallback();
-            }, 1000);
+            setTimeout(finishCallback, 1000);
         } else {
             let element = document.getElementById(elementId);
             if (element != undefined) {
@@ -48,7 +46,7 @@ function CountDown(elementId, finishCallback) {
     this.refresh();
 }
 
-var countDown = CountDown("time2midnight", function () {
+var countDown = CountDown("time2midnight", () => {
     window.location.href = window.location.href;
     window.location.reload();
 })

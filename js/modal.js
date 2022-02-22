@@ -8,48 +8,54 @@ class Modal {
         this.visibleClass = visibleClass;
         this.hiddenClass = hiddenClass;
     }    
-}
 
-Modal.prototype.show = function(title,text,buttonText,callback){
-    this.modal.style.display = 'block';        
-    this.modal.setAttribute('class',this.visibleClass);    
-    if(this.modalTitle){
-        this.modalTitle.innerText = title;
-    }
-    if(this.modalText){
-        this.modalText.innerHTML = text;    
-    }
-    if(this.modalButton){
-        this.modalButton.innerText = buttonText;    
-        if(this.modalButtonCallback){
-            this.modalButton.removeEventListener('click', this.modalButtonCallback)
+    show(title,text,buttonText,callback){
+        this.modal.style.display = 'block';        
+        this.modal.setAttribute('class',this.visibleClass);    
+        if(this.modalTitle){
+            this.modalTitle.innerText = title;
         }
-        this.modalButtonCallback = callback;
-        this.modalButton.addEventListener('click', this.modalButtonCallback);
+        if(this.modalText){
+            this.modalText.innerHTML = text;    
+        }
+        if(this.modalButton){
+            this.modalButton.innerText = buttonText;    
+            if(this.modalButtonCallback){
+                this.modalButton.removeEventListener('click', this.modalButtonCallback)
+            }
+            this.modalButtonCallback = callback;
+            this.modalButton.addEventListener('click', this.modalButtonCallback);
+        }
+    }
+
+    hide() {
+        this.modal.setAttribute('class',this.hiddenClass);
+        let that = this;
+        setTimeout(function() {
+            that.modal.style.display = 'none';
+        }, 500);
     }
 }
 
-Modal.prototype.hide = function() {
-    this.modal.setAttribute('class',this.hiddenClass);
-    let that = this;
-    setTimeout(function() {
-        that.modal.style.display = 'none';
-    }, 500);
-}
 
-
-var Notification = function (elementId, visibleClass="visible", hiddenClass="hidden") {
-    let notification = document.getElementById("notification");
-
-    this.show = function(text,duration=3000) {    
+class Notification{
+    
+    constructor(elementId, visibleClass="visible", hiddenClass="hidden") {
+        this.elementId=elementId;
+        this.visibleClass=visibleClass;
+        this.hiddenClass=hiddenClass;
+    }
+    
+    show(text,duration=3000) {    
+        let notification = document.getElementById(this.elementId);
         notification.innerText=text;
         //show
         notification.style.display = 'block';
-        notification.setAttribute('class',visibleClass);  
+        notification.setAttribute('class',this.visibleClass);  
         if(duration > 0){      
             setTimeout(function() {
                 //wait then hide
-                notification.setAttribute('class',hiddenClass);
+                notification.setAttribute('class',this.hiddenClass);
                 setTimeout(function() {                          
                     notification.style.display = 'none';
                 }, 500);
@@ -57,6 +63,3 @@ var Notification = function (elementId, visibleClass="visible", hiddenClass="hid
         }
     }
 }
-
-var modal = new Modal("modal");
-var notification = new Notification("notification");

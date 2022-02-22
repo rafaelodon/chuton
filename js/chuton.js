@@ -2,6 +2,8 @@ class ChutOn {
 
     constructor() {
         console.log("Iniciando ChutOn...")
+        this.modal = new Modal("modal");
+        this.notification = new Notification("notification");
         this.data = ChutOnData.loadGameData();
         this.game = this.createOrContinueGame();
         this.hideLoading();
@@ -12,9 +14,9 @@ class ChutOn {
     }
 
     createOrContinueGame() {
-        let dayIndex = calculateDayIndex();
+        let dayIndex = Utils.calculateDayIndex();
         if (this.data.index != dayIndex) {
-            notification.show("Começando um novo jogo!");
+            this.notification.show("Começando um novo jogo!");
             ChutOnData.clearData();
             this.data = ChutOnData.loadGameData();
             this.data.index = dayIndex;
@@ -33,7 +35,7 @@ class ChutOn {
             if (value == undefined) {
                 value = "";
             }
-            preSanitize(value);
+            Utils.preSanitize(value);
             this.data.guess = value;
             guessInput.value = value;
             if(!this.practiceMode){
@@ -163,26 +165,22 @@ class ChutOn {
 
     bindGuessInput(elementId) {
 
-        let guessInput = document.getElementById(elementId);
+        let guessInput = document.getElementById(elementId);        
 
-        let that = this;
-
-        let onBlurGuessInput = function (e) {
-            setTimeout(function () {
-                guessInput.focus();
-            }, 10);
+        let onBlurGuessInput = (event) => {
+            setTimeout(() => guessInput.focus(), 10);
         }
 
-        let onKeyUpGuessInput = function (event) {
+        let onKeyUpGuessInput = (event) => {
             if (event.keyCode === 13) {
                 event.preventDefault();
-                that.onClickEnter();
+                this.onClickEnter();
             } else {
-                that.doUpdateGuess(guessInput.value);
+                this.doUpdateGuess(guessInput.value);
             }
         }
 
-        if (!isMobile()) {
+        if (!Utils.isMobile()) {
             guessInput.onblur = onBlurGuessInput;
             guessInput.onkeyup = onKeyUpGuessInput;
             guessInput.focus();
@@ -193,21 +191,17 @@ class ChutOn {
 
         let helpButton = document.getElementById(elementId);
 
-        let onClickHelpButton = function () {
+        helpButton.onclick = () => {
             let helpContent = document.getElementById("help").innerHTML;
-            modal.show("Ajuda", helpContent, "Ok", function () {
-                modal.hide();
-            });
-        }
-
-        helpButton.onclick = onClickHelpButton;
+            this.modal.show("Ajuda", helpContent, "Ok", () => this.modal.hide());
+        };
     }
 
     bindScoreButton(elementId) {
 
         let scoreButton = document.getElementById(elementId);
 
-        let onClickScoreButton = function () {
+        scoreButton.onclick = () => {
             let stats = ChutOnData.loadGameStats();
 
             let total = stats.count.total;
@@ -238,12 +232,8 @@ class ChutOn {
             el2.innerText = lost_perc >= 10 ? ""+lost_perc+"%" : "";                
 
             let scoreContent = document.getElementById("score").innerHTML;
-            modal.show("Placar", scoreContent, "Ok", function () {
-                modal.hide();
-            })
+            this.modal.show("Placar", scoreContent, "Ok", () => this.modal.hide());
         }
-
-        scoreButton.onclick = onClickScoreButton;
     }
 
     bindResetButton(elementId) {
@@ -257,10 +247,10 @@ class ChutOn {
             //window.location.reload();
 
             //Soft reset (practice with a sample word)
-            modal.show("Praticar","Você vai praticar com uma nova palavra aleatória.<br/><br/>"+
+            this.modal.show("Praticar","Você vai praticar com uma nova palavra aleatória.<br/><br/>"+
                 "O treino não entra para suas estatísticas.<br/><br/>"+
                 "O jogo do dia continua preservado.","Ok", () => {
-                modal.hide();
+                this.modal.hide();
                 this.practiceMode = true;
                 let index = Math.floor(Math.random() * words.selected.length);
                 this.game = new ChutOnCore(words.selected[index]);                
@@ -284,7 +274,7 @@ class ChutOn {
         shareButton.onclick = () => {
             let text = "";
             if(!this.practiceMode && this.gameState != ChutOnCore.STATE_PLAYING){
-                text = "Acertei o ChutOn #" + calculateDayIndex() + "\n\n";
+                text = "Acertei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
                 for (let i = 0; i < this.data.guesses.length; i++) {
                     text += this.data.guesses[i].feedback
                         .replaceAll('X', '🟥 ')
@@ -297,7 +287,7 @@ class ChutOn {
             }
             text += "\nhttp://rafaelodon.github.io/chuton";
             navigator.clipboard.writeText(text);
-            notification.show("Copiado! Compartilhe com CTRL+V (Colar).")            
+            this.notification.show("Copiado! Compartilhe com CTRL+V (Colar).")            
         }
     }
 
@@ -329,7 +319,7 @@ class ChutOn {
         }
     }
 
-    onClickBackSpace = function (t) {
+    onClickBackSpace = (t) => {
         let gv = this.data.guess;
         if (gv.length > 0) {
             gv = gv.substr(0, gv.length - 1);
@@ -357,20 +347,12 @@ class ChutOn {
                     if(this.practiceMode){
                         texto = "A palavra é:<br/><span class='answer'>" + this.data.answer + "</span>.<br/><br/>Você pode continuar treinando com outras palavras!";
                     }
-                    setTimeout(() =>                    
-                    modal.show(
-                        "Você perdeu!",
-                        texto,
-                        "Ok",
-                        function () {
-                            modal.hide();
-                        }
-                    ),1000);
+                    setTimeout(() => this.modal.show("Você perdeu!",texto,"Ok", () => this.modal.hide()),1000);
                     this.render(true);
                 }
             );
         } catch (e) {
-            notification.show(e.message);
+            this.notification.show(e.message);
             console.log(e);
         }
     }
@@ -401,16 +383,16 @@ class ChutOn {
 
     congratulate(count) {
         switch (count) {
-            case 1: notification.show("Que sorte!"); break;
-            case 2: notification.show("Sua inteligência é acima da média!"); break;
-            case 3: notification.show("Você é muito inteligente!"); break;
-            case 4: notification.show("Você é esperto!"); break;
-            case 5: notification.show("Parabéns!"); break;
-            case 6: notification.show("Ufa!"); break;
+            case 1: this.notification.show("Que sorte!"); break;
+            case 2: this.notification.show("Sua inteligência é acima da média!"); break;
+            case 3: this.notification.show("Você é muito inteligente!"); break;
+            case 4: this.notification.show("Você é esperto!"); break;
+            case 5: this.notification.show("Parabéns!"); break;
+            case 6: this.notification.show("Ufa!"); break;
         }
     }
 
-    hideLoading = function () {
+    hideLoading = () => {
         document.getElementById("loading").style.display = "none";
         document.getElementById("content").style.display = "block";
     }

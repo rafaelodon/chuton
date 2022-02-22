@@ -19,10 +19,10 @@ class ChutOnCore {
         this.gameState = ChutOnCore.STATE_PLAYING;        
     }
 
-    checkChars = function (word) {        
+    checkChars(word) {        
         let result=["","","","",""];    
-        let answer=sanitize(this.answer).split('');
-        let guess=sanitize(word).split('');                        
+        let answer=Utils.sanitize(this.answer).split('');
+        let guess=Utils.sanitize(word).split('');                        
 
         for(let c=0; c<5; c++){
             let gc=guess[c];
@@ -56,9 +56,9 @@ class ChutOnCore {
         return result.join('');            
     }
 
-    checkWord = function (word) {        
+    checkWord(word) {        
         if(word){        
-            let guess=sanitize(word);
+            let guess=Utils.sanitize(word);
             if(guess.length != 5) {
                 throw new Error(ChutOnCore.ERR_WRONG_LENGTH);
             }else{
