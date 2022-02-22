@@ -394,6 +394,7 @@ class ChutOn {
         }
         stats.history.push(this.data);        
         ChutOnData.saveGameStats(stats);
+        ChutOnData.loadGameStats();
     }
 
     congratulate(count) {
