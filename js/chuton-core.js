@@ -12,8 +12,7 @@ class ChutOnCore {
     static STATE_WIN = 1;
     static STATE_LOST = -1;
 
-    constructor(answer){
-        console.log(answer);
+    constructor(answer){        
         this.answer = answer;           
         this.guesses = [];        
         this.charsState = {};        
@@ -21,33 +20,40 @@ class ChutOnCore {
     }
 
     checkChars = function (word) {        
-        let result="";    
-        let answer=sanitize(this.answer);
-        let guess=sanitize(word);           
+        let result=["","","","",""];    
+        let answer=sanitize(this.answer).split('');
+        let guess=sanitize(word).split('');                        
+
         for(let c=0; c<5; c++){
             let gc=guess[c];
             if(gc==answer[c]){
-                result+=ChutOnCore.CH_RIGHT;
-                this.charsState[gc]=ChutOnCore.CH_RIGHT;
-            }else if (answer.includes(gc)){                                                
-                let re = new RegExp(""+gc, 'g');  
-                let c1 = (answer.match(re) || []).length;
-                let c2 = (guess.substring(0,c+1).match(re) || []).length;
-                console.log(re,answer.match(re),c1,guess.substring(0,gc+1).match(re),c2)
-                if((answer.match(re) || []).length >= (guess.substring(0,c+1).match(re) || []).length){
-                    result+=ChutOnCore.CH_MISPLACED;                            
-                }else{                    
-                    result+=ChutOnCore.CH_MISS;                            
-                }
-                if(this.charsState[gc] != ChutOnCore.CH_RIGHT){
-                    this.charsState[gc] = ChutOnCore.CH_MISPLACED;
-                }
-            }else{
-                result+=ChutOnCore.CH_MISS;
-                this.charsState[gc]=ChutOnCore.CH_MISS;
+                result[c]=ChutOnCore.CH_RIGHT;
+                this.charsState[gc]=ChutOnCore.CH_RIGHT;                
+                answer[c] = "_";
+                guess[c] = "_";
             }
-        }    
-        return result;            
+        }        
+        
+        for(let c=0; c<5; c++){
+            let gc=guess[c];
+            if(gc != "_"){
+                if (answer.includes(gc)){                    
+                    if(guess.slice(0,c+1).filter(e=>e==gc).length <= answer.filter(e=>e==gc).length){
+                        result[c]=ChutOnCore.CH_MISPLACED;                            
+                    }else{                    
+                        result[c]=ChutOnCore.CH_MISS;                            
+                    }                
+                    if(this.charsState[gc] != ChutOnCore.CH_RIGHT){
+                        this.charsState[gc] = ChutOnCore.CH_MISPLACED;
+                    }
+                }else{
+                    result[c]=ChutOnCore.CH_MISS;
+                    this.charsState[gc]=ChutOnCore.CH_MISS;
+                }
+            }
+        }
+
+        return result.join('');            
     }
 
     checkWord = function (word) {        
@@ -100,5 +106,5 @@ class ChutOnCore {
                 })
             }
         }
-    }
+    }    
 }

@@ -49,11 +49,16 @@ body{
     font-weight: normal;
     font-size:1.8vh;    
     color: var(--chuton-white);
-    opacity: 0;
-    filter:alpha(opacity=0);
+    
 }
 
-#message #practice{
+#result{
+    opacity: 0;
+    filter:alpha(opacity=0);
+    display: none;
+}
+
+#practice{
     display: none;
 }
 

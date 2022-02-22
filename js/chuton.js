@@ -45,7 +45,7 @@ class ChutOn {
 
     preRender() {
         this.renderGuesses("display");
-        this.renderResult("message");
+        this.renderResult("result");
         this.renderKeys("keys");
         this.render();
     }
@@ -134,13 +134,14 @@ class ChutOn {
             }
         }
 
-        this.renderResult("message");
+        this.renderResult("result");
     }
 
     renderResult(elementId) {
         if(!this.practiceMode){
             if (this.game.gameState != ChutOnCore.STATE_PLAYING) {
                 let result = document.getElementById(elementId);
+                result.style.display = "block";
                 result.className = "visible";
                 result.style.opacity = 1.0;
 
@@ -262,7 +263,7 @@ class ChutOn {
                 modal.hide();
                 this.practiceMode = true;
                 let index = Math.floor(Math.random() * words.selected.length);
-                this.game = new ChutOnCore(words.selected[index]);
+                this.game = new ChutOnCore(words.selected[index]);                
                 this.data.guesses = [];
                 this.data.guesses.length = 0;
                 this.data.index = index;
@@ -270,6 +271,7 @@ class ChutOn {
                 this.data.state = this.game.gameState;
                 this.doUpdateGuess("");
                 this.render();
+
                 document.getElementById("result").style.display = "none";
                 document.getElementById("practice").style.display = "block";
             })                        

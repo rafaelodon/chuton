@@ -90,7 +90,7 @@ def scrape():
             f.write(f"{w}\n")
 
 
-def create_words_js():
+def create_words_json():
     
     # game candidates
     selectedWords = [w.lower().strip() for w in tuple(open('words1.txt', 'r'))]    
@@ -127,6 +127,6 @@ def create_words_js():
         json.dump({'selected':selectedWords,'index':normal},f)
 
 if __name__ == "__main__":
-    #scrape()
-    create_words_js()
+    scrape()
+    create_words_json()
 
