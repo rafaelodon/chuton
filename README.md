@@ -8,9 +8,10 @@ Play it online: <https://rafaelodon.github.io/chuton/>
 
 The dictionary with more than 11k words is available at `js/words.json`, consisting of an object whose fields are:
 - **selected**: an array of 1k popular 5-letter words to be used as solutions
-- **index**: a valid-word map consisting of the non-accentuated version of a word as key, and an array with all its variations (e.g. `{ "tobas" : ["tobas","tobás] }`)
+- **index**: a valid-word map consisting of the non-accentuated version of a word as key, and an array with all its variations as value (i.e. `{ "tobas" : ["tobas","tobás] }`)
 
 ## Credits:
-* Words scraped from: <http://dicio.com.br/>, <https://museulinguaportuguesa.org.br/> e <https://www.palavras.net/>
+* Words scraped from <http://dicio.com.br/>, <https://museulinguaportuguesa.org.br/> e <https://www.palavras.net/>
+* Mobile verification regex adapted from <http://detectmobilebrowsers.com/
 
 The scraping strategy is at `util/scrape.py`.
