@@ -13,6 +13,7 @@ class ChutOnCore {
     static STATE_LOST = -1;
 
     constructor(answer){
+        console.log(answer);
         this.answer = answer;           
         this.guesses = [];        
         this.charsState = {};        
@@ -29,10 +30,13 @@ class ChutOnCore {
                 result+=ChutOnCore.CH_RIGHT;
                 this.charsState[gc]=ChutOnCore.CH_RIGHT;
             }else if (answer.includes(gc)){                                                
-                let re = new RegExp(""+gc, 'g');                
-                if((answer.match(re) || []).length >= (guess.match(re) || []).length){
+                let re = new RegExp(""+gc, 'g');  
+                let c1 = (answer.match(re) || []).length;
+                let c2 = (guess.substring(0,c+1).match(re) || []).length;
+                console.log(re,answer.match(re),c1,guess.substring(0,gc+1).match(re),c2)
+                if((answer.match(re) || []).length >= (guess.substring(0,c+1).match(re) || []).length){
                     result+=ChutOnCore.CH_MISPLACED;                            
-                }else{
+                }else{                    
                     result+=ChutOnCore.CH_MISS;                            
                 }
                 if(this.charsState[gc] != ChutOnCore.CH_RIGHT){

@@ -282,7 +282,7 @@ class ChutOn {
         shareButton.onclick = () => {
             let text = "";
             if(!this.practiceMode && this.gameState != ChutOnCore.STATE_PLAYING){
-                text = "Acertei meu ChutOn #" + stats.count.total + "\n\n";
+                text = "Acertei o ChutOn #" + calculateDayIndex() + "\n\n";
                 for (let i = 0; i < this.data.guesses.length; i++) {
                     text += this.data.guesses[i].feedback
                         .replaceAll('X', '🟥 ')

@@ -12,7 +12,7 @@
   background: #d0c6b1;
   border-radius: 2vh;
   font-family: "Arvo", Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 7vh;
+  font-size: 6vh;
   line-height: 11vh;
   animation: cubes 1s cubic-bezier(0,0.5,0.5,1) infinite;  
 }
