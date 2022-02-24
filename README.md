@@ -11,7 +11,12 @@ The dictionary with more than 11k words is available at `js/words.json`, consist
 - **index**: a valid-word map consisting of the non-accentuated version of a word as key, and an array with all its variations as value (i.e. `{ "tobas" : ["tobas","tobás"] }`)
 
 ## Credits:
-* Words scraped from <http://dicio.com.br/>, <https://museulinguaportuguesa.org.br/> e <https://www.palavras.net/>
+* Words scraped from:
+  * <http://dicio.com.br/>
+  * <https://www.palavras.net/>
+  * <https://museulinguaportuguesa.org.br/>
+  * <https://www.ime.usp.br/~pf/dicios/>
+  
 * Mobile verification regex adapted from <http://detectmobilebrowsers.com/>
 
 The scraping strategy is at `util/scrape.py`.
