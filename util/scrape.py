@@ -1,4 +1,5 @@
 import traceback
+from urllib import request
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -63,6 +64,10 @@ def scrape_palavras_net():
         print(f"Total {len(words3)}")
     return words3
 
+def scrape_ime_usp():
+    resp = requests.get("https://www.ime.usp.br/~pf/dicios/br-utf8.txt", verify=False)
+    return list(filter(lambda w: len(w) == 5, resp.text.split('\n')))
+
 def scrape():
             
     # list of 1000 popular 5 letters words (game candidates)
@@ -89,6 +94,12 @@ def scrape():
         for w in words4:
             f.write(f"{w}\n")
 
+    # scrape 5 letters words from IME USP all-words list
+    words5 = scrape_ime_usp()
+    with open("words5.txt","w") as f:
+        for w in words5:
+            f.write(f"{w}\n")    
+
 
 def create_words_json():
     
@@ -100,11 +111,13 @@ def create_words_json():
     words2 = [w.lower().strip() for w in tuple(open('words2.txt', 'r'))]    
     words3 = [w.lower().strip() for w in tuple(open('words3.txt', 'r'))]
     words4 = [w.lower().strip() for w in tuple(open('words4.txt', 'r'))]        
+    words5 = [w.lower().strip() for w in tuple(open('words5.txt', 'r'))]        
     validWords=[]    
     validWords.extend(selectedWords)          
     validWords.extend(words2)
     validWords.extend(words3)
     validWords.extend(words4)
+    validWords.extend(words5)
     validWords = list(dict.fromkeys(validWords)) # remove duplicates
     validWords = sorted(validWords)    
 
