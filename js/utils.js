@@ -7,7 +7,7 @@ const REGEX_U = new RegExp("[ùúûũü]",'g');
 class Utils{
     static calculateDayIndex = function (){            
         let date = new Date();
-        let start = new Date(date.getFullYear(), 0, 0);
+        let start = new Date(date.getFullYear(), 0, 0, 0, 0, 0);
         let diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
         let oneDay = 1000 * 60 * 60 * 24;
         let day = Math.floor(diff / oneDay);            
