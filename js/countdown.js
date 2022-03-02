@@ -1,14 +1,14 @@
-function CountDown(elementId, finishCallback) {
+function CountDown(elementId, finishCallback) {        
 
-    this.timeIt = function () {
-        let t1 = new Date();
-        let t2 = new Date(t1.getFullYear(), t1.getMonth(), t1.getDate(), 23, 59, 59, 999);
-        var dif = t2.getTime() - t1.getTime();
+    this.timeIt = function (endDate) {        
+        let now = new Date();
+        let then = endDate;
+        var dif = then.getTime() - now.getTime();
         return Math.floor(dif / 1000);
     }
 
-    this.refresh = function () {
-        let secs = timeIt();
+    this.refresh = function (startDate) {
+        let secs = timeIt(startDate);
         if (secs < 0) {
             setTimeout(finishCallback, 1000);
         } else {
@@ -39,11 +39,13 @@ function CountDown(elementId, finishCallback) {
 
                 element.innerText = text + ".";
             }
-            setTimeout(refresh, 1000);
+            setTimeout(() => refresh(endDate), 1000);
         }
     }
-
-    this.refresh();
+    
+    let today = new Date();
+    let endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+    this.refresh(endDate);
 }
 
 var countDown = CountDown("time2midnight", () => {

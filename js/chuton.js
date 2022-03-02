@@ -273,8 +273,8 @@ class ChutOn {
         let stats = ChutOnData.loadGameStats();        
         shareButton.onclick = () => {
             let text = "";
-            if(!this.practiceMode && this.gameState != ChutOnCore.STATE_PLAYING){
-                if(this.gameState == ChutOnCore.STATE_WIN){
+            if(!this.practiceMode && this.game.gameState != ChutOnCore.STATE_PLAYING){
+                if(this.game.gameState == ChutOnCore.STATE_WIN){
                     text = "Acertei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
                 }else{
                     text = "Tentei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
