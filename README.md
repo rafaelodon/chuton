@@ -12,10 +12,10 @@ The dictionary with more than 11k words is available at `js/words.json`, consist
 
 ## Credits:
 * Words scraped from:
-  * <http://dicio.com.br/>
-  * <https://www.palavras.net/>
-  * <https://museulinguaportuguesa.org.br/>
-  * <https://www.ime.usp.br/~pf/dicios/>
+  - <http://dicio.com.br/>
+  - <https://www.palavras.net/>
+  - <https://museulinguaportuguesa.org.br/>
+  - <https://www.ime.usp.br/~pf/dicios/>
   
 * Mobile verification regex adapted from <http://detectmobilebrowsers.com/>
 

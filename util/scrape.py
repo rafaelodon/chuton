@@ -100,7 +100,6 @@ def scrape():
         for w in words5:
             f.write(f"{w}\n")    
 
-
 def create_words_json():
     
     # game candidates

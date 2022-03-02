@@ -274,12 +274,16 @@ class ChutOn {
         shareButton.onclick = () => {
             let text = "";
             if(!this.practiceMode && this.gameState != ChutOnCore.STATE_PLAYING){
-                text = "Acertei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
+                if(this.gameState == ChutOnCore.STATE_WIN){
+                    text = "Acertei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
+                }else{
+                    text = "Tentei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
+                }                
                 for (let i = 0; i < this.data.guesses.length; i++) {
                     text += this.data.guesses[i].feedback
-                        .replaceAll('X', '🟥 ')
-                        .replaceAll("V", '🟩 ')
-                        .replaceAll("P", '🟨 ')
+                        .replaceAll('X', '🟥')
+                        .replaceAll("V", '🟩')
+                        .replaceAll("P", '🟨')
                         + "\n";
                 }
             }else{
