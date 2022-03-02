@@ -18,8 +18,7 @@ var loadAnimation = () => {
 
 // The game only starts after the 5 letters dictionary JSON is loaded
 var loadGame = () => {    
-    console.log("Aguardando o dicionário de palavras ser carregado..");
-    loadAnimation();
+    console.log("Aguardando o dicionário de palavras ser carregado..");    
     let xhr = new XMLHttpRequest()
     xhr.onreadystatechange = () => {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -39,3 +38,5 @@ var loadGame = () => {
 window.onload = () => {
     loadGame();
 }
+
+loadAnimation();
