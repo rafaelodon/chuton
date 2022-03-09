@@ -1,7 +1,8 @@
 class ChutOn {    
 
-    constructor() {
+    constructor(words) {
         console.log("Iniciando ChutOn...")
+        this.words = words;
         this.modal = new Modal("modal");
         this.notification = new Notification("notification");
         this.data = ChutOnData.loadGameData();
@@ -23,7 +24,7 @@ class ChutOn {
             ChutOnData.saveGameData(this.data);
         }
 
-        let game = new ChutOnCore(words.selected[dayIndex]);
+        let game = new ChutOnCore(this.words, this.words.selected[dayIndex]);
         game.guesses = this.data.guesses;
         game.gameState = this.data.state;
         game.charsState = this.data.keys;
@@ -252,8 +253,8 @@ class ChutOn {
                 "O jogo do dia continua preservado.","Ok", () => {
                 this.modal.hide();
                 this.practiceMode = true;
-                let index = Math.floor(Math.random() * words.selected.length);
-                this.game = new ChutOnCore(words.selected[index]);                
+                let index = Math.floor(Math.random() * this.words.selected.length);
+                this.game = new ChutOnCore(words, this.words.selected[index]);                
                 this.data.guesses = [];
                 this.data.guesses.length = 0;
                 this.data.index = index;
