@@ -12,7 +12,8 @@ class ChutOnCore {
     static STATE_WIN = 1;
     static STATE_LOST = -1;
 
-    constructor(answer){        
+    constructor(words, answer){        
+        this.words = words;
         this.answer = answer;           
         this.guesses = [];        
         this.charsState = {};        
@@ -62,8 +63,8 @@ class ChutOnCore {
             if(guess.length != 5) {
                 throw new Error(ChutOnCore.ERR_WRONG_LENGTH);
             }else{
-                if(guess in words.index) {
-                    console.log("Palavra encontrada:",guess,words.index[guess]);
+                if(guess in this.words.index) {
+                    console.log("Palavra encontrada:", guess, this.words.index[guess]);
                     return this.checkChars(guess);
                 }else{
                     throw new Error(ChutOnCore.ERR_NOT_FOUND);                
