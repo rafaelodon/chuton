@@ -15,7 +15,7 @@ class ChutOn {
     }
 
     createOrContinueGame() {
-        let dayIndex = Utils.calculateDayIndex();
+        let dayIndex = Utils.calculateDayIndex(this.words.selected.length);
         if (this.data.index != dayIndex) {
             this.notification.show("Começando um novo jogo!");
             ChutOnData.clearData();
@@ -276,9 +276,9 @@ class ChutOn {
             let text = "";
             if(!this.practiceMode && this.game.gameState != ChutOnCore.STATE_PLAYING){
                 if(this.game.gameState == ChutOnCore.STATE_WIN){
-                    text = "Acertei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
+                    text = "Acertei o ChutOn #" + this.data.index + "\n\n";
                 }else{
-                    text = "Tentei o ChutOn #" + Utils.calculateDayIndex() + "\n\n";
+                    text = "Tentei o ChutOn #" + this.data.index + "\n\n";
                 }                
                 for (let i = 0; i < this.data.guesses.length; i++) {
                     text += this.data.guesses[i].feedback
@@ -291,6 +291,7 @@ class ChutOn {
                 text = "Jogue ChuTon!";
             }
             text += "\nhttp://rafaelodon.github.io/chuton";
+            console.log(text);
             navigator.clipboard.writeText(text);
             this.notification.show("Copiado! Compartilhe com CTRL+V (Colar).")            
         }

@@ -5,13 +5,13 @@ const REGEX_O = new RegExp("[òóôõö]",'g');
 const REGEX_U = new RegExp("[ùúûũü]",'g');
 
 class Utils{
-    static calculateDayIndex = function (){            
+    static calculateDayIndex = function (length){            
         let date = new Date();
         let start = new Date(date.getFullYear(), 0, 0, 0, 0, 0);
         let diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
         let oneDay = 1000 * 60 * 60 * 24;
         let day = Math.floor(diff / oneDay);            
-        return Math.sqrt(((day+(date.getFullYear()-2022)*365)%words.selected.length)**2);
+        return Math.sqrt(((day+(date.getFullYear()-2022)*365)%length)**2);
     }
 
     static preSanitize = function(text){
